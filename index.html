@@ -1,47 +1,269 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Charity: Water — Change Starts with a Single Drop</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Create a long-lasting ripple — bring clean water to communities ready to thrive.">
+
+  <!-- Proxima Nova is a licensed/proprietary font. If you host the font or have a webfont URL, add it here.
+       For now we rely on the user's system font: Proxima Nova, with Avenir as a fallback. -->
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="charity: water home">
+        <!-- use the provided jerrycan image (decorative) -->
+        <img class="mark" src="water-can-transparent.jpg" width="36" height="36" alt="" aria-hidden="true">
+        <span class="brand-name">charity: water</span>
+      </a>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+      <div class="header-actions">
+        <a class="btn small donate-top shrek-trigger" href="#donate">Donate Today!</a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-label="Hero: change starts with a single drop">
+      <div class="hero-inner container">
+        <div class="hero-left">
+          <div class="teal-plate">
+            <h1>Change Starts with a Single Drop</h1>
+            <p class="lead">
+              Together, we can create a long-lasting ripple — bringing clean water to communities ready to thrive.
             </p>
+
+            <form class="donation-form" id="donate" action="#" aria-label="Donation form">
+              <label for="amount" class="sr-only">Donation amount</label>
+              <input id="amount" name="amount" type="text" inputmode="numeric" placeholder="Help Today!" aria-label="Donation amount">
+              <button class="btn donate" type="submit">Donate</button>
+            </form>
+
+            <aside class="recent-donations" aria-live="polite" aria-label="Recent donations">
+              <div class="rd-header">
+                <strong>Recent Donations</strong>
+                <a href="#" class="see-all">See All</a>
+              </div>
+              <ul>
+                <li>
+                  <span class="donor">Brenda M.</span>
+                  <span class="time">6h ago</span>
+                  <span class="amount">$123</span>
+                </li>
+                <li>
+                  <span class="donor">John H.</span>
+                  <span class="time">Yesterday</span>
+                  <span class="amount">$12</span>
+                </li>
+                <li>
+                  <span class="donor">Adam M.</span>
+                  <span class="time">2d ago</span>
+                  <span class="amount">$15</span>
+                </li>
+              </ul>
+            </aside>
+          </div>
         </div>
+
+        <!-- hero-right removed — hero background is applied to .hero via CSS -->
+      </div>
     </section>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
+    <!-- Story -->
+    <section class="story container" aria-labelledby="story-heading">
+      <div class="story-grid">
+        <div class="story-media">
+          <img src="Primary H.jpg" alt="People celebrating new well" />
+        </div>
+        <div class="story-copy">
+          <h2 id="story-heading">A long-lasting ripple</h2>
+          <p>
+            When clean water arrives it changes everything — health improves, children go to school, families can earn a living.
+            We partner with communities, build sustainable systems, and train local teams so the wells keep running for years to come.
+          </p>
+
+          <ul class="kpis">
+            <li><strong>100%</strong><span> of public donations fund water projects</span></li>
+            <li><strong>500+</strong><span> communities helped</span></li>
+            <li><strong>Local</strong><span> partnerships & training</span></li>
+          </ul>
+
+          <a class="btn cta-large shrek-trigger" href="#donate">Give Water Today!</a>
+        </div>
+      </div>
     </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" aria-labelledby="cta-heading">
+      <div class="container cta-inner">
+        <h3 id="cta-heading">Bring clean water to a community — start the ripple</h3>
+        <p class="muted">Your gift helps build wells, train locals, and monitor systems so water keeps flowing year after year.</p>
+        <a class="btn big donate-hero shrek-trigger" href="#donate">Donate Now!</a>
+      </div>
+      <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,40 C200,100 400,0 720,40 C1040,80 1240,0 1440,40 L1440 80 L0 80 Z" fill="#e6f6fb"/>
+      </svg>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; <span id="year"></span> Charity: Water — This page is a demo layout inspired by the provided mockup.</small>
+    </div>
+  </footer>
+
+  <script>
+    // small UI niceties
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Rain/celebration effect: emit more blue drops + occasional confetti
+    (function(){
+      const lastRain = { ts: 0 };
+      const blues = ['#90E0FF','#6EC8F5','#5EC3E5','#3BA6F7','#1F9CCF']; // varied blue shades
+
+      function createRain(count = 80){
+        // throttle repeated clicks
+        const now = Date.now();
+        if (now - lastRain.ts < 600) return;
+        lastRain.ts = now;
+
+        let container = document.querySelector('.rain-container');
+        if (!container){
+          container = document.createElement('div');
+          container.className = 'rain-container';
+          document.body.appendChild(container);
+        }
+
+        for (let i = 0; i < count; i++){
+          // sometimes emit a round confetti particle
+          const isConfetti = Math.random() > 0.86;
+          const el = document.createElement('div');
+          el.className = isConfetti ? 'confetti' : 'raindrop';
+
+          if (!isConfetti && Math.random() > 0.6) el.classList.add('sway');
+
+          const left = Math.floor(Math.random() * 100); // vw
+          const dur = 900 + Math.floor(Math.random() * 1600); // 900-2500ms
+          const delay = Math.floor(Math.random() * 400);
+
+          // varied sizes
+          const width = isConfetti ? (6 + Math.floor(Math.random() * 12)) : (1 + Math.floor(Math.random() * 4));
+          const height = isConfetti ? (6 + Math.floor(Math.random() * 12)) : (10 + Math.floor(Math.random() * 18));
+
+          el.style.left = left + 'vw';
+          el.style.width = width + 'px';
+          el.style.height = height + 'px';
+          el.style.setProperty('--dur', dur + 'ms');
+          el.style.setProperty('--delay', delay + 'ms');
+
+          // pick a random blue and apply as inline background for richer variety
+          const color = blues[Math.floor(Math.random() * blues.length)];
+          if (isConfetti){
+            el.style.background = `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), ${color})`;
+          } else {
+            el.style.background = color;
+            el.style.opacity = (0.55 + Math.random() * 0.45).toFixed(2);
+          }
+
+          // cleanup after animations
+          el.addEventListener('animationend', function(){
+            // confetti pop handled by its keyframe; remove element
+            el.remove();
+          }, { once: true });
+
+          container.appendChild(el);
+        }
+      }
+
+      // form submit: big celebration
+      const form = document.querySelector('.donation-form');
+      if (form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          createRain(120);
+          alert('Thanks — this is a demo. Replace with your payment integration.');
+        });
+      }
+
+      // wire other donate triggers: header, donate-hero, cta-large, plate donate
+      // - cta-large => smaller celebration and scroll to form
+      // - donate-hero / donate-top => existing behavior (bigger burst)
+      document.querySelectorAll('.donate-top, .donate-hero, .btn.donate:not([type="submit"]), .cta-large').forEach(el=>{
+        el.addEventListener('click', function(e){
+          e.preventDefault();
+          // choose burst size depending on which button
+          const cls = this.classList;
+          if (cls.contains('cta-large')) {
+            createRain(60); // moderate celebration for CTA
+          } else if (cls.contains('donate-hero')) {
+            createRain(100); // larger celebration for prominent donate
+          } else {
+            createRain(90); // default burst
+          }
+
+          // scroll to the donation form smoothly (if present)
+          const target = document.querySelector(this.getAttribute('href') || '#donate');
+          if (target){
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // celebrate scrolls to donate form (if not triggered by a button directly)
+      const donateForm = document.getElementById('donate');
+      if (donateForm){
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              createRain(30);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        observer.observe(donateForm);
+      }
+    })();
+
+    // filepath: /workspaces/CR-02-charity-water-lp/index.html
+    // create a shrek container if missing
+    (function(){
+      let container = document.querySelector('.shrek-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'shrek-container';
+        document.body.appendChild(container);
+      }
+
+      function spawnShrek() {
+        const img = document.createElement('img');
+        img.src = 'shrek.png'; // place shrek.png in the project root
+        img.alt = '';
+        img.className = 'shrek';
+        // position vertically at a random band so it looks lively
+        const vh = Math.max(90, window.innerHeight - 160);
+        const topPct = 8 + Math.floor(Math.random() * 60); // 8% — 68%
+        img.style.top = topPct + 'vh';
+        // randomize duration a bit
+        const dur = 1800 + Math.floor(Math.random() * 900);
+        img.style.setProperty('--dur', dur + 'ms');
+
+        // append, animation runs via CSS; remove after finished
+        container.appendChild(img);
+        img.addEventListener('animationend', () => img.remove(), { once: true });
+      }
+
+      // attach to buttons marked .shrek-trigger
+      document.querySelectorAll('.shrek-trigger').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // allow normal button behavior (scroll) but still show shrek
+          // no preventDefault here
+          spawnShrek();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,198 +1,621 @@
-/* charity: water Brand Colors & Fonts
-
-Primary Colors:
-- Yellow:     #FFC907
-- Blue:       #2E9DF7
-
-Secondary Colors:
-- Light Blue: #8BD1CB
-- Green:      #4FCB53
-- Orange:     #FF902A
-- Red:        #F5402C
-- Dark Green: #159A48
-- Pink:       #F16061
-
-Fonts:
-- Proxima Nova
-- Avenir
-
+/* Simple landing page inspired by the provided mockup.
+   Replace hero.jpg and story.jpg with your own images.
 */
 
-/* 
-  Charity: Water Landing Page Styles
-  This CSS uses the provided color palette and beginner-friendly styles.
-*/
-
-/* Set up the main font and background color for the whole page */
-body {
-  background-color: #f4f8fb; /* Soft light blue for a fresh look */
-  font-family: 'Avenir', 'Proxima Nova', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #222;
+/* Prefer a locally installed Proxima Nova if available */
+@font-face {
+  font-family: 'Proxima Nova Local';
+  src: local('Proxima Nova'), local('ProximaNova');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Add a slight shadow and rounded corners to each section for depth */
-section {
-  background: #fff; /* White background for sections */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft blue shadow */
-  margin: 24px 10px; /* Space between sections */
-  padding: 24px 16px;
+:root{
+  /* primary brand font + fallback */
+  --font-sans: 'Proxima Nova', Avenir;
+  font-family: var(--font-sans);
+
+  /* brand color: keeping the original teal hex from the mockup */
+  --brand-color: #6EAEC6;         /* main brand color */
+  --accent: var(--brand-color);   /* accent uses brand color */
+
+  --yellow: #FFD86B;                      /* keep jerrycan yellow unless README says otherwise */
+  --yellow-dark: #E6C14D;                /* a shade darker for hover states */
+  --muted:#7a8b94;
+  --card:#fff6e6;
+  --max-width:1200px;
+  --container-pad:24px;
+  --shadow: 0 6px 18px rgba(11,20,26,0.2);
+  color-scheme: light;
 }
 
-/* Hero Section Styles */
-.hero {
-  position: relative; /* Needed for overlay */
-  /* Set a background image that covers the whole section */
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-  background-size: cover;      /* Make the image cover the whole area */
-  background-position: center; /* Center the image */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:#07202a;
+  background: linear-gradient(180deg,#f8fcff 0%, #e6f6fb 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:16px;
+}
+
+/* smooth scrolling for anchor navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* container */
+.container{
+  width:100%;
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:var(--container-pad);
+}
+
+/* header */
+.site-header{
+  background:#0b0b0b;
+  color:#fff;
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px var(--container-pad);
+}
+.brand{
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+/* ensure mark image stays fixed size and doesn't stretch */
+.brand .mark{
+  flex:0 0 auto;
+  display:block;
+  width:36px;
+  height:36px;
+  object-fit:contain;
+}
+.brand-name{
+  font-weight:600;
+  font-size:1.05rem;
+  letter-spacing:0.2px;
+}
+
+/* header action */
+.header-actions .btn{
+  text-decoration:none;
+}
+
+/* Buttons */
+/* add a shared transition for donate buttons */
+.btn.donate,
+.header-actions .donate-top{
+  transition: background 180ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 16px;
+  border-radius:10px;
+  background:#ffffff;
+  color:#07202a;
+  box-shadow:var(--shadow);
+  border:0;
+  text-decoration:none;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn.small{
+  padding:8px 12px;
+  border-radius:12px;
+  background:var(--card);
+}
+.btn.donate{
+  background:var(--yellow);
+  color:#111;
+  padding:10px 20px;
+  border-radius:10px;
+}
+.btn.cta-large{
+  background:var(--accent);
+  color:#fff;
+  padding:12px 20px;
+  border-radius:12px;
+  transition: background 180ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.btn.big{
+  background:linear-gradient(90deg,#1f9ccf,#5ec3e5);
+  color:white;
+  padding:14px 26px;
+  border-radius:12px;
+  font-size:1.02rem;
+  transition: background 200ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* ensure header donate matches plate donate styling */
+.header-actions .donate-top{
+  /* override the small button background to match the plate donate */
+  background:var(--yellow);
+  color:#111;
+  padding:8px 14px; /* slightly smaller than main donate but visually consistent */
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  text-decoration:none;
+  border:0;
+  cursor:pointer;
+}
+
+/* hover + focus: slightly darker and lift for both donate buttons */
+.btn.donate:hover,
+.header-actions .donate-top:hover,
+.btn.donate:focus-visible,
+.header-actions .donate-top:focus-visible{
+  background:var(--yellow-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(8,20,28,0.18);
+  outline: none;
+}
+
+/* Slightly darker hover for the blue CTA buttons (visual affordance) */
+.btn.cta-large{
+	/* ...existing code... */
+	transition: background 180ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.btn.cta-large:hover,
+.btn.cta-large:focus-visible{
+	background:#548fa2; /* a shade darker than --accent */
+	transform: translateY(-2px);
+	box-shadow: 0 12px 30px rgba(22,70,86,0.12);
+	outline: none;
+}
+
+/* Slightly darker hover for the big blue gradient button */
+.btn.big{
+	/* ...existing code... */
+	transition: background 200ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.btn.big:hover,
+.btn.big:focus-visible{
+	background: linear-gradient(90deg,#197fb0,#4aa9d6); /* darker gradient */
+	transform: translateY(-2px);
+	box-shadow: 0 14px 36px rgba(10,60,100,0.14);
+	outline:none;
+}
+
+/* Hero */
+.hero{
+  margin-top:0;
+  position:relative;
+  overflow:hidden;
+  /* make the whole hero use the image as its background */
+  background-image: url('Secondary.jpg');
   background-repeat: no-repeat;
-  color: #fff;                 /* White text for contrast */
-  text-align: center;          /* Center the text */
-  padding: 60px 20px;          /* Add space above and below */
-  border-radius: 0 0 16px 16px; /* Only round bottom corners */
-
-  /* Add a dark overlay for better text readability */
-  /* This uses a simple linear-gradient overlay */
-  background-blend-mode: darken;
-  background-color: rgba(46, 157, 247, 0.45); /* Blue overlay */
+  background-position: center;
+  background-size: cover; /* fills the hero area while preserving aspect ratio */
+  min-height: 520px; /* adjust to taste */
 }
 
-/* Make the headline bold and modern */
-.hero h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Soft shadow for readability */
+/* subtle overlay so text stays readable on top of the photo */
+.hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7,32,42,0.22) 0%, rgba(7,32,42,0.06) 50%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+  z-index:2;
 }
 
-/* Style the subheadline */
-.hero p {
-  font-size: 1.2em;
-  margin-top: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.12);
+/* ensure content sits above the overlay */
+.hero-inner{
+  position:relative;
+  z-index:3;
+  display:grid;
+  grid-template-columns: 1fr 540px;
+  gap:0;
+  align-items:stretch;
+  /* ...if you prefer flex layout for beginners, keep simple rules here... */
 }
 
-/* Story Section Styles */
-.story {
-  background-color: #8BD1CB; /* Secondary Light Blue */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
+/* keep the teal plate clearly above the hero background */
+.teal-plate{
+  position:relative;
+  z-index:4;
+  background:var(--accent);
+  color:#fff;
+  padding:48px;              /* slightly more consistent padding for a card look */
+  border-radius:18px;        /* rounded box */
+  box-shadow:var(--shadow);
+  max-width:760px;
+}
+.teal-plate h1{
+  margin:0 0 14px;
+  font-size:2.2rem;
+  font-weight:600;
+  line-height:1.05;
+}
+.lead{
+  margin:0 0 26px;
+  color:rgba(255,255,255,0.92);
+  opacity:0.95;
+  max-width:60ch;
+  font-size:1rem;
 }
 
-/* Add accent color to section headings */
-h2 {
-  color: #2E9DF7; /* Primary blue */
-  margin-top: 0;
-  font-weight: bold;
+/* donation form inside hero */
+.donation-form{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:18px;
+  max-width:520px;
+}
+.donation-form input[type="text"]{
+  flex:1 1 auto;
+  padding:14px 16px;
+  border-radius:10px;
+  border:0;
+  font-size:1rem;
+  background:rgba(255,255,255,0.95);
+  color:#07202a;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+.donation-form .donate{
+  flex:0 0 auto;
 }
 
-/* Call-to-Action Section Styles */
-.call-to-action {
-  background-color: #FFC907; /* Primary Yellow */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
+/* Recent donations card — updated to be more vibrant */
+.recent-donations{
+  margin-top:16px;
+  /* vibrant teal → light blue gradient using the site's accent */
+  background: linear-gradient(135deg, var(--accent) 0%, #8FD3E8 100%);
+  color:#07202a;
+  padding:14px;
+  border-radius:14px;
+  width:340px;
+  /* stronger, airy shadow */
+  box-shadow: 0 18px 48px rgba(13,60,72,0.18);
+  /* left accent bar to add visual weight */
+  border-left:6px solid var(--yellow);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms ease, opacity 180ms ease;
+  position:relative;
 }
 
-/* Style the impact story image */
-.impact-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10);
+/* lift and glow on hover/focus for affordance */
+.recent-donations:hover,
+.recent-donations:focus-within{
+  transform: translateY(-8px);
+  box-shadow: 0 28px 64px rgba(10,60,80,0.22);
+  opacity:1;
 }
 
-/* Donate Button Styles */
-.donate-button {
-  display: inline-block;
-  background-color: #4FCB53; /* Green */
-  color: #fff;
-  padding: 14px 32px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.1em;
-  margin-top: 18px;
-  box-shadow: 0 2px 8px rgba(79, 203, 83, 0.10);
-  transition: background 0.3s, transform 0.2s;
-  border: none;
-  cursor: pointer;
+/* header row tweaks to sit well on colored background */
+.rd-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  font-size:0.95rem;
+  color: rgba(3,24,30,0.95);
+}
+.rd-header .see-all{
+  color: rgba(3,24,30,0.8);
+  text-decoration:underline;
+  font-weight:600;
 }
 
-/* Change button color when hovered */
-.donate-button:hover {
-  background-color: #159A48; /* Dark Green */
-  transform: translateY(-2px) scale(1.04); /* Slight lift */
+/* list and items cleaned up for a modern card look */
+.recent-donations ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.recent-donations li{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  padding:10px 6px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius:10px;
+  margin-bottom:8px;
+  /* remove heavy borders -- use soft separators via spacing */
+  border-top: none;
+}
+.recent-donations li:last-of-type{margin-bottom:0}
+
+/* donor name emphasized with good contrast */
+.recent-donations .donor{
+  font-weight:700;
+  color:#052b30;
 }
 
-/* Add some spacing between sections */
-section {
-  margin-bottom: 20px;
+/* time muted but legible */
+.recent-donations .time{
+  color: rgba(5,34,38,0.65);
+  font-size:0. nine rem;
+  font-size:0.92rem;
+  margin-right:8px;
 }
 
-/* 
-  Media Queries for Responsive Design
-  Media queries help make your website look good on different screen sizes,
-  like phones (small screens) and computers (large screens).
-*/
+/* amount styled as a bright pill to stand out */
+.recent-donations .amount{
+  font-weight:800;
+  background: #ffffff;
+  color: #07202a;
+  padding:6px 10px;
+  border-radius:999px;
+  box-shadow: 0 6px 16px rgba(7,30,38,0.08);
+  min-width:56px;
+  text-align:center;
+  flex:0 0 auto;
+}
 
-/* This media query applies styles when the screen is 600px wide or less (like on most phones) */
-@media (max-width: 600px) {
-  /* Make hero section padding smaller on small screens */
-  .hero {
-    padding: 32px 8px;
-    font-size: 1em;
+/* remove decorative background from the right column (now visual is on .hero) */
+.hero-right{
+  display:none;
+  /* previously had the image — now hidden to avoid duplication */
+}
+
+/* Story section */
+.story{
+  margin-top:36px;
+  padding-bottom:36px;
+}
+.story-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:28px;
+  align-items:center;
+}
+.story-media img{
+  width:100%;
+  border-radius:8px;
+  box-shadow:var(--shadow);
+}
+.story-copy h2{
+  margin-top:0;
+  font-size:1.6rem;
+  color:#07202a;
+}
+.story-copy p{color:#234c55; margin:10px 0 18px}
+.kpis{
+  display:flex;
+  gap:18px;
+  list-style:none;
+  padding:0;
+  margin:0 0 20px;
+}
+.kpis li{background:rgba(255,255,255,0.8); padding:10px 12px; border-radius:8px; box-shadow:0 6px 18px rgba(6,30,36,0.04)}
+.kpis strong{display:block; font-size:1.1rem; color:#07202a}
+.kpis span{color:var(--muted); font-size:0.92rem}
+
+/* final cta */
+.final-cta{
+  margin-top:36px;
+  position:relative;
+  padding:36px 0 10px;
+  background:linear-gradient(180deg,#e6f6fb 0%, #eaf9ff 100%);
+  overflow:visible;
+}
+.cta-inner{
+  text-align:center;
+  padding:24px;
+}
+.cta-inner h3{margin:0 0 8px; font-size:1.45rem}
+.cta-inner .muted{color:var(--muted); margin-bottom:14px}
+
+/* footer */
+.site-footer{
+  padding:18px 0;
+  margin-top:24px;
+}
+.footer-inner{color:#234c55; opacity:0.8}
+
+/* helpers */
+.sr-only{
+  position:absolute!important;
+  height:1px;width:1px;overflow:hidden;
+  clip: rect(1px,1px,1px,1px);
+  white-space:nowrap;
+}
+
+/* Rain effect container - sits on top of the UI but is pointer-events:none */
+.rain-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  overflow:hidden;
+}
+
+/* individual raindrop */
+.raindrop{
+  position:absolute;
+  top:-10vh; /* start above the viewport */
+  /* default blue tone (JS may override with varied blues) */
+  background: linear-gradient(180deg, rgba(94,195,229,0.98), rgba(31,156,207,0.95));
+  width:2px;
+  height:14px;
+  border-radius:2px;
+  opacity:0.95;
+  transform: translateY(0) rotate(0deg);
+  /* durations/delays set inline from JS via CSS variables */
+  animation: fall var(--dur, 1200ms) linear var(--delay, 0ms) forwards;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 18px rgba(28,78,120,0.18));
+}
+
+/* subtle sway using a second animation for variety */
+.raindrop.sway{
+  animation: fall var(--dur,1200ms) linear var(--delay,0ms) forwards, sway var(--dur,1200ms) ease-in-out var(--delay,0ms) both;
+}
+
+/* keyframes: fall moves the drop downward and fades it */
+@keyframes fall{
+  0%{ transform: translateY(0) translateX(0); opacity:1; }
+  90%{ opacity:0.9; }
+  100%{ transform: translateY(110vh) translateX(8px); opacity:0.06; }
+}
+
+/* keyframes: gentle horizontal sway while falling */
+@keyframes sway{
+  0%{ transform: translateY(0) translateX(0) rotate(0deg); }
+  25%{ transform: translateY(30vh) translateX(-8px) rotate(-4deg); }
+  50%{ transform: translateY(60vh) translateX(10px) rotate(2deg); }
+  75%{ transform: translateY(90vh) translateX(-6px) rotate(-3deg); }
+  100%{ transform: translateY(110vh) translateX(0) rotate(0deg); }
+}
+
+/* small splash at bottom (fades quickly) */
+.raindrop::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 10px;
+  height: 3px;
+  /* blue splash */
+  background: rgba(94,162,220,0.95);
+  transform: translateX(-50%) scaleX(0.6);
+  border-radius:2px;
+  opacity:0;
+  transition: opacity 140ms ease;
+}
+
+/* ensure splash is briefly visible near the end of the fall (JS toggles class at animationend if desired) */
+.raindrop.splash::after{
+  opacity:0.9;
+  transition-delay: calc(var(--dur,1200ms) - 140ms);
+}
+
+/* celebratory confetti particle (larger, round, bluish) */
+.confetti{
+  position:absolute;
+  top:-8vh;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  pointer-events:none;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(31,156,207,0.95));
+  opacity:0.95;
+  filter: drop-shadow(0 8px 18px rgba(23,68,120,0.16));
+  animation: fall var(--dur,1400ms) linear var(--delay,0ms) forwards, pop 600ms ease-out calc(var(--dur,1400ms) - 420ms) both;
+}
+
+/* subtle pop/fade for confetti near end */
+@keyframes pop{
+  0%{ transform: scale(1); opacity:1; }
+  60%{ transform: scale(1.2); opacity:0.9; }
+  100%{ transform: scale(0.6); opacity:0.0; }
+}
+
+/* Text "pop" animation for headings when scrolled into view.
+   JS adds `reveal` and `in-view` classes; animate h1/h2 inside those containers. */
+@keyframes popText {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.995);
+    letter-spacing: -0.6px;
   }
-
-  /* Make headline font size smaller so it fits on small screens */
-  .hero h1 {
-    font-size: 1.4em;
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+    letter-spacing: 1.0px;
   }
-
-  /* Make subheadline font size smaller */
-  .hero p {
-    font-size: 1em;
-  }
-
-  /* Make story and call-to-action sections have less padding */
-  .story,
-  .call-to-action,
-  .donation-section {
-    padding: 14px 8px;
-  }
-
-  /* Make impact story image smaller and stack above the text */
-  .impact-content {
-    display: block; /* Stack items vertically */
-    text-align: center;
-  }
-
-  .impact-image {
-    width: 90%;    /* Make image take up most of the width */
-    max-width: 220px;
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: 0.4px;
   }
 }
 
-/* This media query applies styles when the screen is wider than 600px (like on tablets and computers) */
-@media (min-width: 601px) {
-  /* Show image and text side by side in the impact story */
-  .impact-content {
-    display: flex;           /* Place items in a row */
-    align-items: center;     /* Vertically center items */
-    justify-content: center; /* Center the whole group */
-    gap: 28px;               /* Space between image and text */
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .impact-image {
-    width: 300px;
-  }
+/* apply the pop to headings inside revealed blocks */
+.reveal.in-view h1,
+.reveal.in-view h2 {
+  animation-name: popText;
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(.2,.9,.3,1);
+  animation-fill-mode: both;
 }
+
+/* small stagger so h1 then h2 feel sequential */
+.reveal.in-view h1 { animation-delay: 80ms; }
+.reveal.in-view h2 { animation-delay: 160ms; }
+
+/* keep the existing reveal fallback (already present) but ensure headings are initially readable */
+.reveal h1,
+.reveal h2 {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* when in view ensure final state (helps with older browsers that don't run the keyframe) */
+.reveal.in-view h1,
+.reveal.in-view h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Shrek animation: container + shrek element + keyframes */
+.shrek-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  overflow:visible;
+}
+
+/* single shrek element — sized and animated */
+.shrek{
+  position:absolute;
+  width:160px; /* was 96px — make Shrek noticeably bigger */
+  height:auto;
+  will-change: transform, left, top, opacity;
+  transform-origin:50% 50%;
+  animation: shrek-move var(--dur, 2200ms) linear forwards, shrek-spin var(--dur, 2200ms) linear forwards;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,0.30)); /* slightly larger shadow for bigger image */
+}
+
+/* translate left → right */
+@keyframes shrek-move {
+  0%   { left: -240px; opacity: 0; } /* start further left so larger image is fully off-screen */
+  6%   { opacity: 1; }
+  95%  { left: calc(100vw + 240px); opacity: 1; } /* end further right so image exits fully */
+  100% { left: calc(100vw + 240px); opacity: 0; transform: translateY(6px); }
+}
+
+/* cartwheel spin */
+@keyframes shrek-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  30%  { transform: rotate(-360deg) scale(1.02); }
+  60%  { transform: rotate(-720deg) scale(0.98); }
+  100% { transform: rotate(-1080deg) scale(1); }
+}
+
+@media (max-width:520px){
+  .shrek { width:110px; } /* was 64px — smaller than desktop but still clearly visible on mobile */
+}
+
+/* responsiveness */
+@media (max-width:980px){
+  .hero{ min-height: auto; background-position: center top; background-size: cover; }
+  .hero-inner{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{order=
